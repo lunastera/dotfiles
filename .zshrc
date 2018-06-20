@@ -1,3 +1,6 @@
+# 重いときにこれで調べよう！
+# zmodload zsh/zprof && zprof
+
 # これがないとtmuxくんに怒られる ないならないでいい感じのテーマになる
 export TERM="xterm-256color"
 
@@ -10,13 +13,12 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 plugins=(
   git
   zsh-syntax-highlighting
-  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # path PATH MANPATHにユニーク属性をつける 値が重複しなくなる
-typeset -U path PATH MANPATH
+# typeset -U path PATH MANPATH
 
 # どこにおいても対して変わらない環境変数達
 export LANG=ja_JP.UTF-8
@@ -33,20 +35,27 @@ export PATH="/usr/local/bin/scala/bin:$PATH"
 export SCALA_HOME="/usr/local/bin/scala"
 export GIT_EDITOR=vim
 export PATH="$HOME/.stack/stack-1.6.5:$PATH"
+# ============== nodebrew ==============
+# export NODEBREW_HOME="/usr/local/var/nodebrew/current"
+
+# export NODEBREW_ROOT="/usr/local/var/nodebrew"
+
+export PATH="/usr/local/var/nodebrew/current/bin:$PATH"
+
 # ============== rbenv ==============
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # ============== cocos2d ==============
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT=/Applications/cocos2dx/cocos2d-x-3.11.1/tools/cocos2d-console/bin
-export PATH=$PATH:$COCOS_CONSOLE_ROOT
+#export COCOS_CONSOLE_ROOT=/Applications/cocos2dx/cocos2d-x-3.11.1/tools/cocos2d-console/bin
+#export PATH=$PATH:$COCOS_CONSOLE_ROOT
 # Add environment variable COCOS_X_ROOT for cocos2d-x
-export COCOS_X_ROOT=/Applications/cocos2dx
-export PATH=$PATH:$COCOS_X_ROOT
+#export COCOS_X_ROOT=/Applications/cocos2dx
+#export PATH=$PATH:$COCOS_X_ROOT
 # Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
-export COCOS_TEMPLATES_ROOT=/Applications/cocos2dx/cocos2d-x-3.11.1/templates
-export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+#export COCOS_TEMPLATES_ROOT=/Applications/cocos2dx/cocos2d-x-3.11.1/templates
+#export PATH=$PATH:$COCOS_TEMPLATES_ROOT
 
 # ============== python-system-pip ==============
 # 必ずpip install --user　でインストールすること
@@ -190,6 +199,7 @@ alias mumei='change_img mumei01'
 alias riuichi='change_img riuichi1'
 alias la='ls -a'
 alias ll='ls -l'
+alias tma='tmux a -t'
 
 # ============== powerlevel9k ==============
 
@@ -339,3 +349,7 @@ POWERLEVEL9K_BATTERY_CHARGING_BACKGROUND="$DEFAULT_BACKGROUND"
 POWERLEVEL9K_BATTERY_CHARGED_BACKGROUND="$DEFAULT_BACKGROUND"
 POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND="$DEFAULT_BACKGROUND"
 
+# 重いときに調べよう！！！
+#if (which zprof > /dev/null) ;then
+#  zprof | less
+#fi

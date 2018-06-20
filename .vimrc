@@ -41,8 +41,9 @@ set smartcase
 " showmatchの表示秒数 0.1秒単位
 set matchtime=4
 
+" ファイルタイプ別のプラグイン/インデントを有効にする
+filetype plugin indent on
 
-" シンタックス有効
 syntax enable
 
 " ターミナルでマウス使用可能
@@ -64,7 +65,7 @@ set showcmd
 set t_Co=256
 set timeoutlen=1000 ttimeoutlen=0
 
-" ---------------vim-plug-----------
+" ---------- vim-plug start ----------
 if has('vim_starting')
   " 初回起動時のみruntimepathにvim-plugのパス指定
   set rtp+=~/.vim/plugged/vim-plug
@@ -80,16 +81,46 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" git使える
+" git
 Plug 'tpope/vim-fugitive'
+
 " color schema
 Plug 'flazz/vim-colorschemes'
-" tmuxのpowerline
+
+" tmux powerline
 " Plug 'edkolev/tmuxline.vim'
 
+" vim-lsp
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" TypeScript
+Plug 'leafgarland/typescript-vim'
+Plug 'ryanolsonx/vim-lsp-typescript'
+Plug 'runoshun/tscompletejob'
+Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
+
+" ---------- vim-plug end ----------
 call plug#end()
 
-"tmuxline conf
+" ---------- vim-lsp setting ----------
+" - TypeScript
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript'],
+        \ })
+endif
+call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
+    \ 'name': 'tscompletejob',
+    \ 'whitelist': ['typescript'],
+    \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+    \ }))
+
+" ---------- tmuxline conf ----------
 let g:tmuxline_preset = {
   \'a'    : '#S',
   \'c'    : ['#(whoami)', '#(uptime | cud -d " " -f 1,2,3)'],
@@ -99,9 +130,6 @@ let g:tmuxline_preset = {
   \'y'    : ['%R', '%a', '%Y'],
   \'z'    : '#H'}
 
-
-" ファイルタイプ別のプラグイン/インデントを有効にする
-filetype plugin indent on
 
 " -------------commands-------
 command! -nargs=? Jq call s:Jq(<f-args>)
