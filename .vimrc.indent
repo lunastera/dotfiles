@@ -1,5 +1,0 @@
-" 自動インデント有効
-set autoindent
-
-" 自動挿入インデント
-set shiftwidth=4

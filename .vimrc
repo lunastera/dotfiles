@@ -108,17 +108,18 @@ call plug#end()
 " - TypeScript
 if executable('typescript-language-server')
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-        \ 'whitelist': ['typescript'],
-        \ })
+            \ 'name': 'typescript-language-server',
+            \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+            \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
+            \ })
 endif
 call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
     \ 'name': 'tscompletejob',
     \ 'whitelist': ['typescript'],
     \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
     \ }))
+autocmd FileType typescript setlocal omnifunc=lsp#complete
+
 
 " ---------- tmuxline conf ----------
 let g:tmuxline_preset = {

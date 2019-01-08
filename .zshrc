@@ -30,11 +30,16 @@ export PATH="/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/share/man:$MANPATH"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+#export JAVA_HOME=`/usr/libexec/java_home -v "11"`
+#export PATH="$JAVA_HOME/bin:$PATH"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_112patched.jdk/Contents/Home"
+#export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home"
 export PATH="/usr/local/bin/scala/bin:$PATH"
 export SCALA_HOME="/usr/local/bin/scala"
 export GIT_EDITOR=vim
 export PATH="$HOME/.stack/stack-1.6.5:$PATH"
+export GOPATH="$HOME/.go"
+export GOPATH="$GOPATH/bin"
 # ============== nodebrew ==============
 # export NODEBREW_HOME="/usr/local/var/nodebrew/current"
 
@@ -189,6 +194,23 @@ function 256color() {
   done
 }
 
+function select-history() {
+  BUFFER=$(history -n -r | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history
+
+function fd() {
+  DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` \
+    && cd "$DIR"
+}
+
+function fda() {
+  local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
 # alias
 alias -s rb='ruby'
 alias -s py='python3'
@@ -200,6 +222,7 @@ alias riuichi='change_img riuichi1'
 alias la='ls -a'
 alias ll='ls -l'
 alias tma='tmux a -t'
+alias dps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Ports}}"'
 
 # ============== powerlevel9k ==============
 

@@ -7,3 +7,6 @@
 [submodule ".vim/plugged/vim-colorschemes"]
 	path = .vim/plugged/vim-colorschemes
 	url = https://github.com/flazz/vim-colorschemes.git
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git
