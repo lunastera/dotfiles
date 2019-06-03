@@ -1,3 +1,7 @@
+# vim
 .vim/.netrwhist
 .vim/plugged/*
+
+# tmux
 .tmux/plugins/*
+.tmux/resurrect/tmux*

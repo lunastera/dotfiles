@@ -1,12 +1,3 @@
-[submodule ".vim/plugged/tmuxline.vim"]
-	path = .vim/plugged/tmuxline.vim
-	url = https://github.com/edkolev/tmuxline.vim
-[submodule ".vim/plugged/vim-fugitive"]
-	path = .vim/plugged/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule ".vim/plugged/vim-colorschemes"]
-	path = .vim/plugged/vim-colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
