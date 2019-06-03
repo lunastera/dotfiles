@@ -18,9 +18,10 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # path PATH MANPATHにユニーク属性をつける 値が重複しなくなる
-# typeset -U path PATH MANPATH
+# typeset -U path PATH MANPATH TMPDIR
 
 # どこにおいても対して変わらない環境変数達
+# export TMPDIR="/private$TMPDIR"
 export LANG=ja_JP.UTF-8
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export PATH="$PATH:/Applications/MAMP/bin/php/php5.4.10/bin"
@@ -32,14 +33,18 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 #export JAVA_HOME=`/usr/libexec/java_home -v "11"`
 #export PATH="$JAVA_HOME/bin:$PATH"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_112patched.jdk/Contents/Home"
+#export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_112patched.jdk/Contents/Home"
 #export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home"
 export PATH="/usr/local/bin/scala/bin:$PATH"
 export SCALA_HOME="/usr/local/bin/scala"
 export GIT_EDITOR=vim
 export PATH="$HOME/.stack/stack-1.6.5:$PATH"
-export GOPATH="$HOME/.go"
-export GOPATH="$GOPATH/bin"
+export GOPATH="$HOME.go/bin"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/era/.sdkman"
+[[ -s "/Users/era/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/era/.sdkman/bin/sdkman-init.sh"
 # ============== nodebrew ==============
 # export NODEBREW_HOME="/usr/local/var/nodebrew/current"
 
@@ -211,11 +216,16 @@ function fda() {
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
 
+function what-tmux-change-workingdirectory() {
+	echo "prefix :"
+	echo "attach -c <Directory>"
+}
+
 # alias
 alias -s rb='ruby'
 alias -s py='python3'
 alias -s php='php -f'
-alias python="pyhton3"
+alias python="python3"
 alias cbg='change_img'
 alias mumei='change_img mumei01'
 alias riuichi='change_img riuichi1'
@@ -223,6 +233,7 @@ alias la='ls -a'
 alias ll='ls -l'
 alias tma='tmux a -t'
 alias dps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Ports}}"'
+# alias vim='/usr/local/bin/mvim'
 
 # ============== powerlevel9k ==============
 
@@ -376,3 +387,5 @@ POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND="$DEFAULT_BACKGROUND"
 #if (which zprof > /dev/null) ;then
 #  zprof | less
 #fi
+
+

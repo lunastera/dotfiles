@@ -1,6 +1,0 @@
-pane	project04-0	0	:web/db	1	:*	0	:/Users/era/github/Project04/pazpro	1	zsh	:
-pane	project04-0	0	:web/db	1	:*	1	:/Users/era/github/Project04/pazpro	0	zsh	:
-pane	project04-0	1	:git	0	:-	0	:/Users/era/github/Project04	1	zsh	:
-window	project04-0	0	1	:*	1d6e,141x43,0,0[141x21,0,0,0,141x21,0,22,1]
-window	project04-0	1	0	:-	b800,141x43,0,0,3
-state	project04-0	
