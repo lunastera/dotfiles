@@ -4,4 +4,4 @@
 
 # tmux
 .tmux/plugins/*
-.tmux/resurrect/tmux*
+.tmux/resurrect/*
