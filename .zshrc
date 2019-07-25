@@ -18,10 +18,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # path PATH MANPATHにユニーク属性をつける 値が重複しなくなる
-# typeset -U path PATH MANPATH TMPDIR
+typeset -U path PATH MANPATH TMPDIR
 
-# どこにおいても対して変わらない環境変数達
-# export TMPDIR="/private$TMPDIR"
 export LANG=ja_JP.UTF-8
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export PATH="$PATH:/Applications/MAMP/bin/php/php5.4.10/bin"
@@ -33,18 +31,18 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 #export JAVA_HOME=`/usr/libexec/java_home -v "11"`
 #export PATH="$JAVA_HOME/bin:$PATH"
-#export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_112patched.jdk/Contents/Home"
-#export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home"
 export PATH="/usr/local/bin/scala/bin:$PATH"
 export SCALA_HOME="/usr/local/bin/scala"
 export GIT_EDITOR=vim
 export PATH="$HOME/.stack/stack-1.6.5:$PATH"
-export GOPATH="$HOME.go/bin"
+export GOPATH="$HOME/.go"
+export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/era/.sdkman"
 [[ -s "/Users/era/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/era/.sdkman/bin/sdkman-init.sh"
+
 # ============== nodebrew ==============
 # export NODEBREW_HOME="/usr/local/var/nodebrew/current"
 
@@ -134,17 +132,16 @@ setopt nonomatch
 
 # 空Enterで背景切り替え
 # cbg数字で切り替え画像変更
-# なんかグローバル化ー＞初期化でわけなあかんかった
 typeset -g -a image_list
 image_list=("" "/Users/era/Pictures/background/riuichi08.jpg")
 image_index=1
 function change_img() {
   # 数値以外が入る可能性がある場合こっち
-     if [ $# -ne 1 ]; then
-         image_list=("" "/Users/era/Pictures/background/riuichi08.jpg")
-     else
-         image_list=("" "/Users/era/Pictures/background/$1.jpg")
-     fi
+    if [ $# -ne 1 ]; then
+        image_list=("" "/Users/era/Pictures/background/riuichi08.jpg")
+    else
+        image_list=("" "/Users/era/Pictures/background/$1.jpg")
+    fi
     # image_list=("" "/Users/era/Pictures/background/background$1.jpg")
 }
 toggle_bg() {
@@ -170,7 +167,6 @@ toggle_bg() {
     zle accept-line
   fi
 }
-
 # Enterにバインド
 zle -N toggle_bg
 bindkey '^m' toggle_bg
@@ -220,6 +216,17 @@ function what-tmux-change-workingdirectory() {
 	echo "prefix :"
 	echo "attach -c <Directory>"
 }
+
+function peco-src () {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
 
 # alias
 alias -s rb='ruby'
@@ -387,5 +394,3 @@ POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND="$DEFAULT_BACKGROUND"
 #if (which zprof > /dev/null) ;then
 #  zprof | less
 #fi
-
-
