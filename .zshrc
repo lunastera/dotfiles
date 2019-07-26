@@ -39,31 +39,13 @@ export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# ============== sdkman ==============
 export SDKMAN_DIR="/Users/era/.sdkman"
 [[ -s "/Users/era/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/era/.sdkman/bin/sdkman-init.sh"
-
-# ============== nodebrew ==============
-# export NODEBREW_HOME="/usr/local/var/nodebrew/current"
-
-# export NODEBREW_ROOT="/usr/local/var/nodebrew"
-
-export PATH="/usr/local/var/nodebrew/current/bin:$PATH"
 
 # ============== rbenv ==============
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-
-# ============== cocos2d ==============
-# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-#export COCOS_CONSOLE_ROOT=/Applications/cocos2dx/cocos2d-x-3.11.1/tools/cocos2d-console/bin
-#export PATH=$PATH:$COCOS_CONSOLE_ROOT
-# Add environment variable COCOS_X_ROOT for cocos2d-x
-#export COCOS_X_ROOT=/Applications/cocos2dx
-#export PATH=$PATH:$COCOS_X_ROOT
-# Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
-#export COCOS_TEMPLATES_ROOT=/Applications/cocos2dx/cocos2d-x-3.11.1/templates
-#export PATH=$PATH:$COCOS_TEMPLATES_ROOT
 
 # ============== python-system-pip ==============
 # 必ずpip install --user　でインストールすること
@@ -71,11 +53,6 @@ eval "$(rbenv init -)"
 
 # ============== thefuck ==============
 eval $(thefuck --alias)
-
-# ============== npmbin ===============
-# ローカルのnode_modulesにPATHを通すコマンド
-# npmbin [command]
-npmbin(){[ $# -ne 0 ] && $(npm bin)/$*}
 
 # ============== pyenv ~ powerline ==============
 # export PATH="$HOME/.pyenv/bin:$PATH"
@@ -223,7 +200,6 @@ function peco-src () {
     BUFFER="cd ${selected_dir}"
     zle accept-line
   fi
-  zle clear-screen
 }
 zle -N peco-src
 bindkey '^]' peco-src
@@ -241,6 +217,11 @@ alias ll='ls -l'
 alias tma='tmux a -t'
 alias dps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Ports}}"'
 # alias vim='/usr/local/bin/mvim'
+
+# ============== npmbin ===============
+# ローカルのnode_modulesにPATHを通すコマンド
+# npmbin [command]
+npmbin(){[ $# -ne 0 ] && $(npm bin)/$*}
 
 # ============== powerlevel9k ==============
 
