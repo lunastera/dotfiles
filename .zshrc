@@ -72,11 +72,6 @@ eval $(thefuck --alias)
 #powerline-daemon -q
 # . /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
-# ============== phpenv ==============
-# rbenv改造してるせいか、rbenvよりPATHの優先順位が高くないとバグる
-# export PATH="$HOME/.phpenv/bin:$PATH"
-
-# eval "$(phpenv init -)"
 
 # vimで操作遅いのを改善
 KEYTIMEOUT=1
@@ -187,11 +182,6 @@ function fd() {
 function fda() {
   local dir
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-}
-
-function what-tmux-change-workingdirectory() {
-	echo "prefix :"
-	echo "attach -c <Directory>"
 }
 
 function peco-src () {
