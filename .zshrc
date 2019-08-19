@@ -38,6 +38,7 @@ export PATH="$HOME/.stack/stack-1.6.5:$PATH"
 export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export FZF_DEFAULT_OPTS="--reverse --ansi --select-1"
 
 # ============== sdkman ==============
 export SDKMAN_DIR="/Users/era/.sdkman"
@@ -184,15 +185,15 @@ function fda() {
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
 
-function peco-src () {
-  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+function fzf-src () {
+  local selected_dir=$(ghq list -p | fzf)
   if [ -n "$selected_dir" ]; then
     BUFFER="cd ${selected_dir}"
     zle accept-line
   fi
 }
-zle -N peco-src
-bindkey '^]' peco-src
+zle -N fzf-src
+bindkey '^]' fzf-src
 
 # alias
 alias -s rb='ruby'
