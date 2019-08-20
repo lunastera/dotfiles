@@ -6,7 +6,6 @@ export TERM="xterm-256color"
 
 export ZSH=/Users/era/.oh-my-zsh
 
-# ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # highlight -> suggestionの順じゃないと何故か爆発する
@@ -38,7 +37,7 @@ export PATH="$HOME/.stack/stack-1.6.5:$PATH"
 export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export FZF_DEFAULT_OPTS="--reverse --ansi --select-1"
+export FZF_DEFAULT_OPTS="--reverse --ansi --select-1 --border"
 
 # ============== sdkman ==============
 export SDKMAN_DIR="/Users/era/.sdkman"
@@ -194,6 +193,28 @@ function fzf-src () {
 }
 zle -N fzf-src
 bindkey '^]' fzf-src
+
+# fshow - git commit browser (enter for show, ctrl-d for diff)
+function fshow() {
+  local out shas sha q k
+  while out=$(
+      git log --graph --color=always \
+          --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+      fzf --ansi --multi --no-sort --reverse --query="$q" \
+          --print-query --expect=ctrl-d); do
+    q=$(head -1 <<< "$out")
+    k=$(head -2 <<< "$out" | tail -1)
+    shas=$(sed '1,2d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
+    [ -z "$shas" ] && continue
+    if [ "$k" = ctrl-d ]; then
+      git diff --color=always $shas | less -R
+    else
+      for sha in $shas; do
+        git show --color=always $sha | less -R
+      done
+    fi
+  done
+}
 
 # alias
 alias -s rb='ruby'
