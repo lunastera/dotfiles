@@ -29,3 +29,7 @@
 [ghq]
   root = ~/.ghq
   root = ~/.go/src
+[ghq "https://ghe.admin.h/hatena"]
+  vcs = git
+[url "https://02d87557ab798c007774ac8ed413f9f0632c5ee0:x-oauth-basic@github.com/"]
+	insteadOf = https://github.com/
