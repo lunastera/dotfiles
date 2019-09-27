@@ -192,6 +192,8 @@ function 256color() {
   done
 }
 
+# ============== fzf configuration
+
 function select-history() {
   BUFFER=$(history -n -r | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
@@ -208,6 +210,8 @@ function fda() {
   local dir
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
+zle -N fda
+bindkey "^f" fda
 
 __docker_pre_test() {
   if [[ -z "$1" ]] && [[ $(docker ps --format '{{.Names}}') ]]; then
