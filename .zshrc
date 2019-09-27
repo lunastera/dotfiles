@@ -38,9 +38,16 @@ export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export FZF_DEFAULT_OPTS="--reverse --ansi --select-1 --border"
+export PATH="/Users/era/Library/Python/3.7/bin:$PATH"
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/opt/openssl/lib/"
+
+# -============= perl   ==============
+export PATH="$HOME/.plenv/bin:$PATH"
+eval "$(plenv init -)"
 
 # ============== sdkman ==============
-export SDKMAN_DIR="/Users/era/.sdkman"
+export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "/Users/era/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/era/.sdkman/bin/sdkman-init.sh"
 
 # ============== rbenv ==============
@@ -53,6 +60,20 @@ eval "$(rbenv init -)"
 
 # ============== thefuck ==============
 eval $(thefuck --alias)
+
+# ============== pyenv ==========================
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# ============== pyenv-virtualenv
+eval "$(pyenv virtualenv-init -)"
+
+# ============== poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+fpath+=~/.zfunc
 
 # ============== pyenv ~ powerline ==============
 # export PATH="$HOME/.pyenv/bin:$PATH"
@@ -158,6 +179,10 @@ function show() {
 	eval "$(echo -e $cmd)"
 }
 
+function set-hostname() {
+  scutil --set HostName $(scutil --get LocalHostName)
+}
+
 function 256color() {
   for i in {0..255} ; do
     printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
@@ -182,6 +207,23 @@ function fd() {
 function fda() {
   local dir
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+__docker_pre_test() {
+  if [[ -z "$1" ]] && [[ $(docker ps --format '{{.Names}}') ]]; then
+    return 0;
+  fi
+
+  if [[ ! -z "$1" ]] && [[ $(docker ps -a --format '{{.Names}}') ]]; then
+    return 0;
+  fi
+
+  echo "No containers found";
+  return 1;
+}
+
+docker-rm() {
+  __docker_pre_test "all" && docker ps -a -f status=exited | fzf -m | awk '{print $1}' | while read -r name; do docker rm -f $name; done
 }
 
 function fzf-src () {
@@ -220,7 +262,6 @@ function fshow() {
 alias -s rb='ruby'
 alias -s py='python3'
 alias -s php='php -f'
-alias python="python3"
 alias cbg='change_img'
 alias mumei='change_img mumei01'
 alias riuichi='change_img riuichi1'
