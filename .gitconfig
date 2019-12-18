@@ -4,12 +4,6 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -18,18 +12,8 @@
 [push]
 	default = matching
 [alias]
-	git = !git
-	st = status
-	df = diff
-	ad = add
-	cm = commit
-	ps = push
 	merged-delete = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|master'|xargs git branch -d; };f"
   tree = log --graph --all --format=\"%x09%C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s\"
 [ghq]
   root = ~/.ghq
   root = ~/.go/src
-[ghq "https://ghe.admin.h/hatena"]
-  vcs = git
-[url "https://02d87557ab798c007774ac8ed413f9f0632c5ee0:x-oauth-basic@github.com/"]
-	insteadOf = https://github.com/
