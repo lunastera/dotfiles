@@ -42,34 +42,36 @@ export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/opt/openssl/lib/"
 
-# -============= perl   ==============
-export PATH="$HOME/.plenv/bin:$PATH"
-eval "$(plenv init -)"
+# ============== anyenv =============
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+
+# ============== perl   =============
+# export PATH="$HOME/.plenv/bin:$PATH"
+# eval "$(plenv init -)"
 
 # ============== sdkman ==============
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # ============== rbenv ==============
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
 
 # ============== python-system-pip ==============
 # 必ずpip install --user　でインストールすること
 # export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 
-# ============== thefuck ==============
-eval $(thefuck --alias)
 
 # ============== pyenv ==========================
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# if command -v pyenv 1>/dev/null 2>&1; then
+#   eval "$(pyenv init -)"
+# fi
 
 # ============== pyenv-virtualenv
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # ============== poetry
 export PATH="$HOME/.poetry/bin:$PATH"
@@ -122,47 +124,6 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 # グロッビングの設定　正直ない方がいい
 setopt nonomatch
-
-# # 空Enterで背景切り替え
-# # cbg数字で切り替え画像変更
-# typeset -g -a image_list
-# image_list=("" "$HOME/Pictures/background/riuichi08.jpg")
-# image_index=1
-# function change_img() {
-#   # 数値以外が入る可能性がある場合こっち
-#     if [ $# -ne 1 ]; then
-#         image_list=("" "$HOME/Pictures/background/riuichi08.jpg")
-#     else
-#         image_list=("" "$HOME/Pictures/background/$1.jpg")
-#     fi
-#     # image_list=("" "$HOME/Pictures/background/background$1.jpg")
-# }
-# toggle_bg() {
-#   # Enter押した時＄Bufferに何もなかったら
-#   if [ -z "$BUFFER" ]; then
-#     # indexが2なら1に設定
-#     if test $image_index -eq 2; then
-#       image_index=1
-#     else
-# 			image_index=$(($image_index+1))
-#     fi
-#     image_path=$image_list[$image_index]
-# 		# osascriptで背景設定
-#     osascript -e "tell application \"iTerm\"
-#       tell current session of first window
-# 				set background image to \"$image_path\"
-#       end tell
-#     end tell"
-#     zle reset-prompt
-#     # 構文解釈して次の行へ
-#   else
-#     # こっちも設定しとかないと大変なことになる(Enterが押せない)
-#     zle accept-line
-#   fi
-# }
-# # Enterにバインド
-# zle -N toggle_bg
-# bindkey '^m' toggle_bg
 
 function show() {
 	cmd="\${$1//:/'\n'"
@@ -254,7 +215,6 @@ function fshow() {
 
 # alias
 alias -s rb='ruby'
-alias -s py='python3'
 alias -s php='php -f'
 # override dc command
 alias dc='docker-compose'
@@ -263,7 +223,6 @@ alias la='ls -a'
 alias ll='ls -l'
 alias tma='tmux a -t'
 alias dps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Ports}}"'
-# alias vim='/usr/local/bin/mvim'
 
 # ============== npmbin ===============
 # ローカルのnode_modulesにPATHを通すコマンド
