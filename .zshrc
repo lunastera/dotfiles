@@ -4,7 +4,7 @@
 # これがないとtmuxくんに怒られる ないならないでいい感じのテーマになる
 export TERM="xterm-256color"
 
-export ZSH=/Users/era/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
@@ -38,7 +38,7 @@ export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export FZF_DEFAULT_OPTS="--reverse --ansi --select-1 --border"
-export PATH="/Users/era/Library/Python/3.7/bin:$PATH"
+export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/opt/openssl/lib/"
 
@@ -48,7 +48,7 @@ eval "$(plenv init -)"
 
 # ============== sdkman ==============
 export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "/Users/era/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/era/.sdkman/bin/sdkman-init.sh"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # ============== rbenv ==============
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -123,56 +123,46 @@ setopt pushd_ignore_dups
 # グロッビングの設定　正直ない方がいい
 setopt nonomatch
 
-# 空Enterで背景切り替え
-# cbg数字で切り替え画像変更
-typeset -g -a image_list
-image_list=("" "/Users/era/Pictures/background/riuichi08.jpg")
-image_index=1
-function change_img() {
-  # 数値以外が入る可能性がある場合こっち
-    if [ $# -ne 1 ]; then
-        image_list=("" "/Users/era/Pictures/background/riuichi08.jpg")
-    else
-        image_list=("" "/Users/era/Pictures/background/$1.jpg")
-    fi
-    # image_list=("" "/Users/era/Pictures/background/background$1.jpg")
-}
-toggle_bg() {
-  # Enter押した時＄Bufferに何もなかったら
-  if [ -z "$BUFFER" ]; then
-    # indexが2なら1に設定
-    if test $image_index -eq 2; then
-      image_index=1
-    else
-			image_index=$(($image_index+1))
-    fi
-    image_path=$image_list[$image_index]
-		# osascriptで背景設定
-    osascript -e "tell application \"iTerm\"
-      tell current session of first window
-				set background image to \"$image_path\"
-      end tell
-    end tell"
-    zle reset-prompt
-    # 構文解釈して次の行へ
-  else
-    # こっちも設定しとかないと大変なことになる(Enterが押せない)
-    zle accept-line
-  fi
-}
-# Enterにバインド
-zle -N toggle_bg
-bindkey '^m' toggle_bg
-
-function gitlab() {
-	if test $1 = up; then
-		docker-compose -f /Users/era/docker/gitlab/docker-compose.yml start
-	elif test $1 = down; then
-		docker-compose -f /Users/era/docker/gitlab/docker-compose.yml stop
-	else
-		echo "$1 : not command."
-	fi
-}
+# # 空Enterで背景切り替え
+# # cbg数字で切り替え画像変更
+# typeset -g -a image_list
+# image_list=("" "$HOME/Pictures/background/riuichi08.jpg")
+# image_index=1
+# function change_img() {
+#   # 数値以外が入る可能性がある場合こっち
+#     if [ $# -ne 1 ]; then
+#         image_list=("" "$HOME/Pictures/background/riuichi08.jpg")
+#     else
+#         image_list=("" "$HOME/Pictures/background/$1.jpg")
+#     fi
+#     # image_list=("" "$HOME/Pictures/background/background$1.jpg")
+# }
+# toggle_bg() {
+#   # Enter押した時＄Bufferに何もなかったら
+#   if [ -z "$BUFFER" ]; then
+#     # indexが2なら1に設定
+#     if test $image_index -eq 2; then
+#       image_index=1
+#     else
+# 			image_index=$(($image_index+1))
+#     fi
+#     image_path=$image_list[$image_index]
+# 		# osascriptで背景設定
+#     osascript -e "tell application \"iTerm\"
+#       tell current session of first window
+# 				set background image to \"$image_path\"
+#       end tell
+#     end tell"
+#     zle reset-prompt
+#     # 構文解釈して次の行へ
+#   else
+#     # こっちも設定しとかないと大変なことになる(Enterが押せない)
+#     zle accept-line
+#   fi
+# }
+# # Enterにバインド
+# zle -N toggle_bg
+# bindkey '^m' toggle_bg
 
 function show() {
 	cmd="\${$1//:/'\n'"
@@ -266,9 +256,9 @@ function fshow() {
 alias -s rb='ruby'
 alias -s py='python3'
 alias -s php='php -f'
+# override dc command
+alias dc='docker-compose'
 alias cbg='change_img'
-alias mumei='change_img mumei01'
-alias riuichi='change_img riuichi1'
 alias la='ls -a'
 alias ll='ls -l'
 alias tma='tmux a -t'
