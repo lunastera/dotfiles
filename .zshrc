@@ -46,29 +46,15 @@ export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/opt/openssl/lib/"
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
-# ============== perl   =============
-# export PATH="$HOME/.plenv/bin:$PATH"
-# eval "$(plenv init -)"
 
 # ============== sdkman ==============
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# ============== rbenv ==============
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
 
 # ============== python-system-pip ==============
 # 必ずpip install --user　でインストールすること
 # export PATH="$HOME/Library/Python/2.7/bin:$PATH"
-
-
-# ============== pyenv ==========================
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# if command -v pyenv 1>/dev/null 2>&1; then
-#   eval "$(pyenv init -)"
-# fi
 
 # ============== pyenv-virtualenv
 # eval "$(pyenv virtualenv-init -)"
