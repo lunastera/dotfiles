@@ -5,3 +5,6 @@
 # tmux
 .tmux/plugins/*
 .tmux/resurrect/*
+
+# gitconfig
+.gitconfig
