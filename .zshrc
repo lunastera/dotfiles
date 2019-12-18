@@ -46,11 +46,9 @@ export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/opt/openssl/lib/"
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
-
 # ============== sdkman ==============
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 
 # ============== python-system-pip ==============
 # 必ずpip install --user　でインストールすること
