@@ -1,8 +1,8 @@
 [user]
 	name = era
-	email = uera48a@gmail.com
+	email = lounastera@gmail.com
 [core]
-	excludesfile = /Users/era/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	autocrlf = input
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
