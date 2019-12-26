@@ -28,8 +28,6 @@ export PATH="/usr/local/sbin:$PATH"
 export MANPATH="/usr/local/share/man:$MANPATH"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-#export JAVA_HOME=`/usr/libexec/java_home -v "11"`
-#export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="/usr/local/bin/scala/bin:$PATH"
 export SCALA_HOME="/usr/local/bin/scala"
 export GIT_EDITOR=vim
@@ -50,35 +48,12 @@ eval "$(anyenv init -)"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# ============== python-system-pip ==============
-# 必ずpip install --user　でインストールすること
-# export PATH="$HOME/Library/Python/2.7/bin:$PATH"
-
 # ============== pyenv-virtualenv
 # eval "$(pyenv virtualenv-init -)"
 
 # ============== poetry
 export PATH="$HOME/.poetry/bin:$PATH"
 fpath+=~/.zfunc
-
-# ============== pyenv ~ powerline ==============
-# export PATH="$HOME/.pyenv/bin:$PATH"
-# brewとの干渉を避ける
-# if which pyenv 2>&1 >/dev/null; then alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"; fi
-
-# eval "$(pyenv init -)"
-
-# 3.5.xのpowerline
-#powerline-daemon -q
-# . ~/.local/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
-
-# 3.6.xのpowerline
-# source ~/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
-
-# system(2.7.x)のpowerline
-#powerline-daemon -q
-# . /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-
 
 # vimで操作遅いのを改善
 KEYTIMEOUT=1
@@ -254,15 +229,8 @@ POWERLEVEL9K_STATUS_VERBOSE=true
 POWERLEVEL9K_STATUS_CROSS=true
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
-#POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{cyan}\u256D\u2500%f"
-#POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="╭─%f"
-# POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰─%F{008}\uF460 %f"
-#POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-#POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{008}> %f"
-
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="╭"
 # POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="❱ "
-# POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰\uF460 "
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{014}\u2570%F{cyan}\uF460%F{073}\uF460%F{109}\uF460%f "
 
 #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context ssh root_indicator dir_writable dir )
