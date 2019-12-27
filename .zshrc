@@ -1,14 +1,12 @@
-# 重いときにこれで調べよう！
+# Use when the response is slow
 # zmodload zsh/zprof && zprof
 
-# これがないとtmuxくんに怒られる ないならないでいい感じのテーマになる
+# Without it, tmux does not work properly
 export TERM="xterm-256color"
 
-export ZSH=$HOME/.oh-my-zsh
-
+ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
-# highlight -> suggestionの順じゃないと何故か爆発する
 plugins=(
   git
   zsh-syntax-highlighting
@@ -16,12 +14,12 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# path PATH MANPATHにユニーク属性をつける 値が重複しなくなる
-typeset -U path PATH MANPATH TMPDIR
+# Give "PATH MANPATH fpath" a unique attribute
+# Unique attributes prevent duplicate values
+typeset -U PATH MANPATH fpath
 
 export LANG=ja_JP.UTF-8
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-export PATH="$PATH:/Applications/MAMP/bin/php/php5.4.10/bin"
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
@@ -30,69 +28,36 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export PATH="/usr/local/bin/scala/bin:$PATH"
 export SCALA_HOME="/usr/local/bin/scala"
-export GIT_EDITOR=vim
 export PATH="$HOME/.stack/stack-1.6.5:$PATH"
 export GOPATH="$HOME/.go"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export FZF_DEFAULT_OPTS="--reverse --ansi --select-1 --border"
-export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/opt/openssl/lib/"
+export GIT_EDITOR=vim
 
-# ============== anyenv =============
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+# ============== option ==============
+setopt print_eight_bit    # 日本語ファイル名表示可能
+setopt no_flow_control    # Ctrl+S/Ctrl+Q によるフロー制御を無効
+setopt auto_cd            # ディレクトリ名だけでcd
+setopt auto_pushd         # cdで自動pushd
+setopt pushd_ignore_dups  # pushd時、重複したディレクトリを追加しない
 
-# ============== sdkman ==============
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# alias
+alias la='ls -a'
+alias ll='ls -l'
+alias tma='tmux a -t'
+alias dps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Ports}}"'
 
-# ============== pyenv-virtualenv
-# eval "$(pyenv virtualenv-init -)"
-
-# ============== poetry
-export PATH="$HOME/.poetry/bin:$PATH"
-fpath+=~/.zfunc
-
-# vimで操作遅いのを改善
+# ESC delay resolution for vim
 KEYTIMEOUT=1
-# gitコマンドでサブコマンドやブランチ名の補完ができるようになるやつ
-fpath=(~/.zsh/completion $fpath)
-# 色を使用可能に
-autoload -Uz colors; colors
 
-# 補完
-autoload -U compinit
-compinit -u
-# title
-function chpwd() {
-	echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007"
-}
+# colors
+# Used in complete
+autoload -Uz colors
+colors
 
-#===========オプション==============
-# 日本語ファイル名表示可能
-setopt print_eight_bit
-# フリーコントロール無効
-setopt no_flow_control
-# ディレクトリ名だけでcd
-setopt auto_cd
-# cdで自動pushd
-setopt auto_pushd
-# 重複したディレクトリを追加しない
-setopt pushd_ignore_dups
-# グロッビングの設定　正直ない方がいい
-setopt nonomatch
-
-function show() {
-	cmd="\${$1//:/'\n'"
-	eval "$(echo -e $cmd)"
-}
-
-function set-hostname() {
-  scutil --set HostName $(scutil --get LocalHostName)
-}
-
+# For checking 256 colors
 function 256color() {
   for i in {0..255} ; do
     printf "\x1b[48;5;%sm%3d\e[0m " "$i" "$i"
@@ -102,7 +67,46 @@ function 256color() {
   done
 }
 
-# ============== fzf configuration
+# title
+function chpwd() {
+	echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print "/"$1"/"$2}'| rev)\007"
+}
+
+# Mainly for sbt.
+function set-hostname() {
+  scutil --set HostName $(scutil --get LocalHostName)
+}
+
+# Using commands in the local node_modules
+# npmbin [command]
+npmbin(){[ $# -ne 0 ] && $(npm bin)/$*}
+
+# ============== complete ==============
+fpath=(~/.zsh/completion $fpath)
+fpath+=~/.zfunc
+
+autoload -U compinit
+compinit
+
+zstyle ':completion:*' format '%BCompleting %d%b'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' completer _oldlist _complete _history _match _ignored _prefix
+
+zstyle ':completion:*:default' menu select=1    # 補完候補を ←↓↑→ で選択 (補完候補が色分け表示される)
+
+# ============== anyenv ==============
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+
+# ============== sdkman ==============
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# ============== poetry ==============
+export PATH="$HOME/.poetry/bin:$PATH"
+
+# ============== fzf ==============
+export FZF_DEFAULT_OPTS="--reverse --ansi --select-1 --border"
 
 function select-history() {
   BUFFER=$(history -n -r | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
@@ -171,22 +175,6 @@ function fshow() {
     fi
   done
 }
-
-# alias
-alias -s rb='ruby'
-alias -s php='php -f'
-# override dc command
-alias dc='docker-compose'
-alias cbg='change_img'
-alias la='ls -a'
-alias ll='ls -l'
-alias tma='tmux a -t'
-alias dps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Ports}}"'
-
-# ============== npmbin ===============
-# ローカルのnode_modulesにPATHを通すコマンド
-# npmbin [command]
-npmbin(){[ $# -ne 0 ] && $(npm bin)/$*}
 
 # ============== powerlevel9k ==============
 
