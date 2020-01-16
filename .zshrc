@@ -56,6 +56,10 @@ KEYTIMEOUT=1
 # Used in complete
 autoload -Uz colors
 colors
+# zmv
+# Rename files
+autoload -Uz zmv
+alias zmv='noglob zmv'
 
 # For checking 256 colors
 function 256color() {
