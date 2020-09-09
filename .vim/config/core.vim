@@ -75,16 +75,3 @@ if has("mouse")
 	set guioptions+=a
 	set ttymouse=xterm2
 endif
-
-" StatusLine
-set laststatus=2
-set showtabline=2
-set noshowmode
-set showcmd
-
-" Powerline
-" let g:Powerline_symbols = 'fancy'
-" 文字化けするならこっち
-" let g:Powerline_symbols = 'compatible'
-set t_Co=256
-set timeoutlen=1000 ttimeoutlen=0

@@ -1,3 +1,13 @@
+" lightline
+set laststatus=2
+set showtabline=2
+set noshowmode
+set showcmd
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
 " Indent
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors=0
@@ -22,12 +32,3 @@ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
   exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 call NERDTreeHighlightFile('rb', 'Red', 'none', 'red', '#151515')
-
-" LanguageClient
-let g:deoplete#enable_at_startup = 1
-let g:LanguageClient_serverCommands = {
-    \ 'ruby': ['solargraph', 'stdio'],
-\}
-call deoplete#custom#option('omni_patterns', {
-			\'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
-			\})
