@@ -116,11 +116,9 @@ alias dps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{
 alias -s sh=sh
 
 # load scripts
-eval "$(anyenv init -)"
+( type anyenv > /dev/null 2>&1 ) && eval "$(anyenv init -)"
 [[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && source $SDKMAN_DIR/bin/sdkman-init.sh
 source $XDG_CONFIG_HOME/zsh/user/functions.zsh
 source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
 
-if (type zprof > /dev/null 2>&1) ;then
-  zprof | less
-fi
+( type zprof > /dev/null 2>&1 ) && zprof | less
