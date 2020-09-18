@@ -35,9 +35,21 @@ typeset -U PATH MANPATH fpath
 export LANG=ja_JP.UTF-8
 export GIT_EDITOR=vim
 KEYTIMEOUT=1
+readonly SBT_OPT_LIST=(
+  "-Dsbt.global.base=$XDG_CACHE_HOME/sbt"
+  "-Dsbt.boot.directory=$XDG_CACHE_HOME/sbt/boot"
+  "-Dsbt.preloaded=$XDG_CACHE_HOME/sbt/preloaded"
+  "-Dsbt.global.staging=$XDG_CACHE_HOME/sbt/staging"
+  "-Dsbt.global.settings=$XDG_CONFIG_HOME/sbt/global"
+  "-Dsbt.global.plugins=$XDG_CONFIG_HOME/sbt/plugins"
+  "-Dsbt.global.zinc=$XDG_CACHE_HOME/sbt/zinc"
+  "-Dsbt.dependency.base=$XDG_CACHE_HOME/sbt/dependency"
+  "-Dsbt.repository.config=$XDG_CONFIG_HOME/sbt/repositories"
+  "-Dsbt.ivy.home=$XDG_CACHE_HOME/ivy2"
+)
 
+# export SBT_OPTS="$(IFS=" "; echo "${SBT_OPT_LIST[*]}")"
 export FZF_DEFAULT_OPTS="--reverse --ansi --select-1 --border"
-# export SBT_OPTS="-Dsbt.global.base=$XDG_CACHE_HOME/sbt -Dsbt.boot.directory=$XDG_CACHE_HOME/sbt/boot -Dsbt.preloaded=$XDG_CACHE_HOME/sbt/preloaded -Dsbt.global.staging=$XDG_CACHE_HOME/sbt/staging -Dsbt.global.zinc=$XDG_CACHE_HOME/sbt/zinc -Dsbt.dependency.base=$XDG_CACHE_HOME/sbt/dependency -Dsbt.repository.config=$XDG_CONFIG_HOME/sbt/repositories -Dsbt.global.settings=$XDG_CONFIG_HOME/sbt/global -Dsbt.global.plugins=$XDG_CONFIG_HOME/sbt/plugins -Dsbt.ivy.home=$XDG_CACHE_HOME/ivy2"
 export MAVEN_OPTS="-Dmaven.repo.local=$XDG_CACHE_HOME/m2/repository"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export MANPATH=/usr/local/share/man:$MANPATH
