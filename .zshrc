@@ -43,7 +43,6 @@ export GOPATH=$XDG_DATA_HOME/go
 export SDKMAN_DIR=$XDG_DATA_HOME/sdkman
 export JAVA_HOME=$SDKMAN_DIR/candidates/java/current
 export ANYENV_ROOT=$XDG_DATA_HOME/anyenv
-export ANYENV_DEFINITION_ROOT=$ANYENV_ROOT/anyenv-install
 export POETRY_HOME=$XDG_DATA_HOME/poetry
 
 export GEM_HOME=$XDG_CACHE_HOME/gem
@@ -58,6 +57,7 @@ export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
 export IPYHTONDIR=$XDG_CACHE_HOME/ipython
 export DOCKER_TMPDIR=$XDG_CACHE_HOME/docker
 
+export ANYENV_DEFINITION_ROOT=$XDG_CONFIG_HOME/anyenv/anyenv-install
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
 export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
@@ -113,6 +113,8 @@ alias dps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{
 # suffix
 alias -s sh=sh
 
+# load scripts
+eval "$(anyenv init -)"
 [[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && source $SDKMAN_DIR/bin/sdkman-init.sh
 source $XDG_CONFIG_HOME/zsh/user/functions.zsh
 source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
