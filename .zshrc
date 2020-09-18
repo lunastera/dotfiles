@@ -123,6 +123,6 @@ eval "$(anyenv init -)"
 source $XDG_CONFIG_HOME/zsh/user/functions.zsh
 source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
 
-if (which zprof > /dev/null) ;then
+if (type zprof > /dev/null 2>&1) ;then
   zprof | less
 fi
