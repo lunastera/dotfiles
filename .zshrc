@@ -1,18 +1,25 @@
-### [zprof] check if zshrc is slow
+# zprof
 # zmodload zsh/zprof && zprof
 
 export TERM="xterm-256color"
 
+# XDG Base Directory Specification
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 
 ZROOTDIR=$XDG_DATA_HOME/zsh
 
+# history
 HISTFILE=$ZROOTDIR/histfile
 HISTSIZE=10000000
 SAVEHIST=10000000
+setopt hist_ignore_dups     # 直前と同じコマンドは履歴に追加しない
+setopt hist_ignore_all_dups # 重複したコマンドは古い方をすべて削除
+setopt inc_append_history   # イクリメンタルに履歴追加
+setopt hist_reduce_blanks   # 余分な空白は詰めて保存
 
+# oh-my-zsh
 export ZSH=$XDG_DATA_HOME/ohmyzsh
 ZSH_CUSTOM=$XDG_CONFIG_HOME/ohmyzsh/custom
 ZSH_THEME="powerlevel9k/powerlevel9k"
@@ -24,6 +31,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# environment
 typeset -U PATH MANPATH fpath
 
 export LANG=ja_JP.UTF-8
@@ -76,18 +84,14 @@ export PATH=$CARGO_HOME/bin:$RUSTUP_HOME/bin:$PATH
 export PATH=$ANYENV_ROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 
-# ============== option ==============
+# option
 setopt print_eight_bit    # 日本語ファイル名表示可能
 setopt no_flow_control    # Ctrl+S/Ctrl+Q によるフロー制御を無効
 setopt auto_cd            # ディレクトリ名だけでcd
 setopt auto_pushd         # cdで自動pushd
 setopt pushd_ignore_dups  # pushd時、重複したディレクトリを追加しない
-setopt hist_ignore_dups   # 直前と同じコマンドは履歴に追加しない
-setopt hist_ignore_all_dups # 重複したコマンドは古い方をすべて削除
-setopt inc_append_history # イクリメンタルに履歴追加
-setopt hist_reduce_blanks # 余分な空白は詰めて保存
 
-# ============== complete ==============
+# complete
 fpath=($ZROOTDIR/completion $fpath)
 fpath=($ZROOTDIR/zfunc $fpath)
 
@@ -100,7 +104,7 @@ zstyle ':completion:*' completer _oldlist _complete _history _match _ignored _pr
 
 zstyle ':completion:*:default' menu select=1  # 補完候補を ←↓↑→ で選択 (補完候補が色分け表示される)
 
-# rename files
+# zmv
 autoload -Uz zmv
 alias zmv='noglob zmv'
 
@@ -119,7 +123,6 @@ eval "$(anyenv init -)"
 source $XDG_CONFIG_HOME/zsh/user/functions.zsh
 source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
 
-### [zprof] check if zshrc is slow
-#if (which zprof > /dev/null) ;then
-#  zprof | less
-#fi
+if (which zprof > /dev/null) ;then
+  zprof | less
+fi
