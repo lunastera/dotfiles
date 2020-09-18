@@ -12,7 +12,6 @@ mkdir $XDG_CONFIG_HOME/vim
 mkdir $XDG_CONFIG_HOME/zsh
 ln -s $HOME/dotfiles/.config/vim/user $XDG_CONFIG_HOME/vim/user
 ln -s $HOME/dotfiles/.config/zsh/user $XDG_CONFIG_HOME/zsh/user
-ln -s $HOME/dotfiles/.hyper.js $HOME/.hyper.js
 ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
 ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc
 ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
