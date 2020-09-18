@@ -1,18 +1,12 @@
 [user]
-	name = lunastera
+	name = era
 	email = lounastera@gmail.com
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
   safecrlf = true
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
 [alias]
-	merged-delete = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|master'|xargs git branch -d; };f"
   tree = log --graph --all --format=\"%x09%C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s\"
 [ghq]
-  root = ~/.go/src
-  root = ~/.ghq
+  root = ~/.local/share/go
+  root = ~/.local/share/ghq

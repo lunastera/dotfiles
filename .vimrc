@@ -1,3 +1,3 @@
-set runtimepath+=~/.vim/
-runtime! config/*.vim
-runtime! config/plug/plug-conf.vim
+set runtimepath+=~/.config/vim/
+runtime! user/init/*.vim
+runtime! user/plug-conf.vim

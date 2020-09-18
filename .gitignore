@@ -1,11 +1,8 @@
 # vim
-.vim/.netrwhist
-.vim/plugged/*
-.vim/autoload/plug.vim
+/.config/vim/.netrwhist
+/.config/vim/plugged/*
+/.config/vim/autoload/plug.vim
 
 # tmux
-.tmux/plugins/*
-.tmux/resurrect/*
-
-# gitconfig
-.gitconfig
+/.config/tmux/plugins/*
+/.config/tmux/resurrect/*
