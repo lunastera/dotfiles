@@ -29,7 +29,6 @@ function select-history() {
   CURSOR=$#BUFFER
 }
 zle -N select-history
-bindkey '^r' select-history
 
 function fd() {
   DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` \
@@ -41,7 +40,6 @@ function fda() {
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
 zle -N fda
-bindkey "^f" fda
 
 __docker_pre_test() {
   if [[ -z "$1" ]] && [[ $(docker ps --format '{{.Names}}') ]]; then
@@ -68,7 +66,6 @@ function fzf-src () {
   fi
 }
 zle -N fzf-src
-bindkey '^]' fzf-src
 
 # fshow - git commit browser (enter for show, ctrl-d for diff)
 function fshow() {

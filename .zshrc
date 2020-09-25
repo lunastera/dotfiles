@@ -101,6 +101,12 @@ setopt auto_cd            # ディレクトリ名だけでcd
 setopt auto_pushd         # cdで自動pushd
 setopt pushd_ignore_dups  # pushd時、重複したディレクトリを追加しない
 
+bindkey '^[\]' forward-word
+bindkey '^[\[' backward-word
+bindkey '^r' select-history
+bindkey "^f" fda
+bindkey '^\\' fzf-src
+
 # complete
 fpath=($ZROOTDIR/completion $fpath)
 fpath=($ZROOTDIR/zfunc $fpath)
