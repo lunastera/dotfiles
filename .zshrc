@@ -30,7 +30,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # environment
-typeset -U PATH MANPATH fpath
+typeset -U PATH MANPATH FPATH
 
 export LANG=ja_JP.UTF-8
 export GIT_EDITOR=vim
@@ -52,7 +52,7 @@ readonly SBT_OPT_LIST=(
 export FZF_DEFAULT_OPTS="--reverse --ansi --select-1 --border"
 export MAVEN_OPTS="-Dmaven.repo.local=$XDG_CACHE_HOME/m2/repository"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-export MANPATH=/usr/local/share/man:$MANPATH
+
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
@@ -82,6 +82,8 @@ export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
 export AWS_CONFIG_FILE=$XDG_CONFIG_HOME/aws/config
 export AWS_SHARED_CREDENTIALS_FILE=$XDG_CONFIG_HOME/aws/credentials
 
+export FPATH=$ZROOTDIR/completion:$ZROOTDIR/zfunc
+export MANPATH=/usr/local/share/man:$MANPATH
 export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 export PATH=$POETRY_HOME/bin:$PATH
 export PATH=$XDG_DATA_HOME/bin:$PATH
@@ -106,10 +108,6 @@ bindkey '^[\[' backward-word
 bindkey '^r' select-history
 bindkey "^f" fda
 bindkey '^\\' fzf-src
-
-# complete
-fpath=($ZROOTDIR/completion $fpath)
-fpath=($ZROOTDIR/zfunc $fpath)
 
 autoload -Uz compinit && compinit
 autoload -Uz colors && colors
