@@ -67,8 +67,8 @@ function fzf-src () {
 }
 zle -N fzf-src
 
-# fshow - git commit browser (enter for show, ctrl-d for diff)
-function fshow() {
+# git commit browser (enter for show, ctrl-d for diff)
+function glog() {
   local out shas sha q k
   while out=$(
       git log --graph --color=always \
@@ -88,3 +88,4 @@ function fshow() {
     fi
   done
 }
+zle -N glog

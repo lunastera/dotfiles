@@ -103,11 +103,14 @@ setopt auto_cd            # ディレクトリ名だけでcd
 setopt auto_pushd         # cdで自動pushd
 setopt pushd_ignore_dups  # pushd時、重複したディレクトリを追加しない
 
+source $XDG_CONFIG_HOME/zsh/user/functions.zsh
+
 bindkey '^[\]' forward-word
 bindkey '^[\[' backward-word
 bindkey '^r' select-history
 bindkey "^f" fda
 bindkey '^\\' fzf-src
+bindkey '^g' glog
 
 autoload -Uz compinit && compinit
 autoload -Uz colors && colors
@@ -134,7 +137,6 @@ alias -s sh=sh
 # load scripts
 ( type anyenv > /dev/null 2>&1 ) && eval "$(anyenv init -)"
 [[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && source $SDKMAN_DIR/bin/sdkman-init.sh
-source $XDG_CONFIG_HOME/zsh/user/functions.zsh
 source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
 
 ( type zprof > /dev/null 2>&1 ) && zprof | less
