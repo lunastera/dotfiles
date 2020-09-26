@@ -82,7 +82,7 @@ export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
 export AWS_CONFIG_FILE=$XDG_CONFIG_HOME/aws/config
 export AWS_SHARED_CREDENTIALS_FILE=$XDG_CONFIG_HOME/aws/credentials
 
-export FPATH=$ZROOTDIR/completion:$ZROOTDIR/zfunc
+export FPATH=$ZROOTDIR/completion:$ZROOTDIR/zfunc:$FPATH
 export MANPATH=/usr/local/share/man:$MANPATH
 export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 export PATH=$POETRY_HOME/bin:$PATH
