@@ -45,7 +45,7 @@ readonly SBT_OPT_LIST=(
   "-Dsbt.global.zinc=$XDG_CACHE_HOME/sbt/zinc"
   "-Dsbt.dependency.base=$XDG_CACHE_HOME/sbt/dependency"
   "-Dsbt.repository.config=$XDG_CONFIG_HOME/sbt/repositories"
-  "-Dsbt.ivy.home=$XDG_CACHE_HOME/ivy2"
+  "-Dsbt.ivy.home=$XDG_CACHE_HOME/ivy"
 )
 
 # export SBT_OPTS="$(IFS=" "; echo "${SBT_OPT_LIST[*]}")"
