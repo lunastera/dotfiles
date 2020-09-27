@@ -35,7 +35,7 @@ typeset -U PATH MANPATH FPATH
 export LANG=ja_JP.UTF-8
 export GIT_EDITOR=vim
 KEYTIMEOUT=1
-readonly SBT_OPT_LIST=(
+SBT_OPT_LIST=(
   "-Dsbt.global.base=$XDG_CACHE_HOME/sbt"
   "-Dsbt.boot.directory=$XDG_CACHE_HOME/sbt/boot"
   "-Dsbt.preloaded=$XDG_CACHE_HOME/sbt/preloaded"
