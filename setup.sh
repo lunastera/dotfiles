@@ -8,24 +8,34 @@
 [[ ! -e $XDG_CACHE_HOME ]]  && mkdir -p $XDG_CACHE_HOME
 [[ ! -e $XDG_CONFIG_HOME ]] && mkdir -p $XDG_CONFIG_HOME
 
-mkdir $XDG_CONFIG_HOME/vim
-mkdir $XDG_CONFIG_HOME/zsh
-ln -s $HOME/dotfiles/.config/vim/user $XDG_CONFIG_HOME/vim/user
-ln -s $HOME/dotfiles/.config/zsh/user $XDG_CONFIG_HOME/zsh/user
-ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
-ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc
-ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
-ln -s $HOME/dotfiles/.gitignore_global $HOME/.gitignore_global
-ln -s $HOME/dotfiles/.gitconfig $HOME/.gitconfig
+[[ ! -e $XDG_CONFIG_HOME/zsh ]] && mkdir -p $XDG_CONFIG_HOME/zsh
+[[ ! -e $XDG_CONFIG_HOME/vim ]] && mkdir -p $XDG_CONFIG_HOME/vim
+
+DOTFILE_HOME=$(cd $(dirname $0); pwd)
+
+ln -fs $DOTFILE_HOME/.config/zsh/user $XDG_CONFIG_HOME/zsh/user
+ln -fs $DOTFILE_HOME/.config/vim/user $XDG_CONFIG_HOME/vim/user
+ln -fs $DOTFILE_HOME/.zshrc $HOME/.zshrc
+ln -fs $DOTFILE_HOME/.vimrc $HOME/.vimrc
+ln -fs $DOTFILE_HOME/.tmux.conf $HOME/.tmux.conf
+ln -fs $DOTFILE_HOME/.gitconfig $HOME/.gitconfig
+ln -fs $DOTFILE_HOME/.gitignore_global $HOME/.gitignore_global
 
 # ohmyzsh install
-git clone https://github.com/ohmyzsh/ohmyzsh.git $XDG_DATA_HOME/ohmyzsh
-git clone https://github.com/bhilburn/powerlevel9k.git $XDG_CONFIG_HOME/ohmyzsh/custom/themes/powerlevel9k
+if [[ ! -e $XDG_DATA_HOME/ohmyzsh ]]; then
+  git clone https://github.com/ohmyzsh/ohmyzsh.git $XDG_DATA_HOME/ohmyzsh
+fi
+if [[ ! -e $XDG_CONFIG_HOME/ohmyzsh/custom/themes/powerlevel9k ]]; then
+  git clone https://github.com/bhilburn/powerlevel9k.git $XDG_CONFIG_HOME/ohmyzsh/custom/themes/powerlevel9k
+fi
 
 # tpm install
-git clone https://github.com/tmux-plugins/tpm $XDG_DATA_HOME/tmux/plugins/tpm
-
+if [[ ! -e $XDG_DATA_HOME/tmux/plugins/tpm ]]; then
+  git clone https://github.com/tmux-plugins/tpm $XDG_DATA_HOME/tmux/plugins/tpm
+fi
 # anyenv install
-git clone https://github.com/anyenv/anyenv.git $XDG_DATA_HOME
+if [[ ! -e $XDG_DATA_HOME/anyenv ]]; then
+  git clone https://github.com/anyenv/anyenv.git $XDG_DATA_HOME/anyenv
+fi
 
 source $HOME/.zshrc
