@@ -50,6 +50,7 @@ export SDKMAN_DIR=$XDG_DATA_HOME/sdkman
 export JAVA_HOME=$SDKMAN_DIR/candidates/java/current
 export ANYENV_ROOT=$XDG_DATA_HOME/anyenv
 export POETRY_HOME=$XDG_DATA_HOME/poetry
+export TIG_HOME=$XDG_DATA_HOME/tig
 
 export GEM_HOME=$XDG_CACHE_HOME/gem
 export GEM_SPEC_CACHE=$GEM_HOME/specs
@@ -74,6 +75,7 @@ export FPATH=$ZROOTDIR/completion:$ZROOTDIR/zfunc:$FPATH
 export MANPATH=/usr/local/share/man:$MANPATH
 export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 export PATH=$POETRY_HOME/bin:$PATH
+export PATH=$TIG_HOME/bin:$PATH
 export PATH=$XDG_DATA_HOME/bin:$PATH
 export PATH=$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 export PATH=$JAVA_HOME/bin:$PATH
