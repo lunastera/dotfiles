@@ -18,8 +18,11 @@ ln -fs $DOTFILE_HOME/.config/vim/user $XDG_CONFIG_HOME/vim/user
 ln -fs $DOTFILE_HOME/.zshrc $HOME/.zshrc
 ln -fs $DOTFILE_HOME/.vimrc $HOME/.vimrc
 ln -fs $DOTFILE_HOME/.tmux.conf $HOME/.tmux.conf
-ln -fs $DOTFILE_HOME/.gitconfig $HOME/.gitconfig
 ln -fs $DOTFILE_HOME/.gitignore_global $HOME/.gitignore_global
+if [[ ! "${1:-}" == "--ignore-gitconfig" ]]; then
+  ln -fs $DOTFILE_HOME/.gitconfig $HOME/.gitconfig
+fi
+
 
 # ohmyzsh install
 if [[ ! -e $XDG_DATA_HOME/ohmyzsh ]]; then
