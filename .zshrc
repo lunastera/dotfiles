@@ -17,18 +17,6 @@ setopt hist_ignore_all_dups # 重複したコマンドは古い方をすべて�
 setopt inc_append_history   # イクリメンタルに履歴追加
 setopt hist_reduce_blanks   # 余分な空白は詰めて保存
 
-# oh-my-zsh
-export ZSH=$XDG_DATA_HOME/ohmyzsh
-ZSH_CUSTOM=$XDG_CONFIG_HOME/ohmyzsh/custom
-ZSH_THEME="powerlevel9k/powerlevel9k"
-
-plugins=(
-  git
-  zsh-syntax-highlighting
-)
-
-source $ZSH/oh-my-zsh.sh
-
 # environment
 typeset -U PATH MANPATH FPATH
 
@@ -138,5 +126,6 @@ alias -s sh=sh
 ( type anyenv > /dev/null 2>&1 ) && eval "$(anyenv init -)"
 [[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && source $SDKMAN_DIR/bin/sdkman-init.sh
 source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
+source $ZROOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ( type zprof > /dev/null 2>&1 ) && zprof | less
