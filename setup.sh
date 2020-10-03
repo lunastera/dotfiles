@@ -23,11 +23,6 @@ if [[ ! "${1:-}" == "--ignore-gitconfig" ]]; then
   ln -fs $DOTFILE_HOME/.gitconfig $HOME/.gitconfig
 fi
 
-
-# ohmyzsh install
-if [[ ! -e $XDG_DATA_HOME/ohmyzsh ]]; then
-  git clone https://github.com/ohmyzsh/ohmyzsh.git $XDG_DATA_HOME/ohmyzsh
-fi
 if [[ ! -e $XDG_DATA_HOME/zsh/powerlevel9k ]]; then
   git clone https://github.com/bhilburn/powerlevel9k.git $XDG_DATA_HOME/zsh/powerlevel9k
 fi
