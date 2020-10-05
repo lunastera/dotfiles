@@ -13,14 +13,14 @@
 
 DOTFILE_HOME=$(cd $(dirname $0); pwd)
 
-ln -fs $DOTFILE_HOME/.config/zsh/user $XDG_CONFIG_HOME/zsh/user
-ln -fs $DOTFILE_HOME/.config/vim/user $XDG_CONFIG_HOME/vim/user
-ln -fs $DOTFILE_HOME/.zshrc $HOME/.zshrc
-ln -fs $DOTFILE_HOME/.vimrc $HOME/.vimrc
-ln -fs $DOTFILE_HOME/.tmux.conf $HOME/.tmux.conf
-ln -fs $DOTFILE_HOME/.gitignore_global $HOME/.gitignore_global
+ln -nfs $DOTFILE_HOME/.config/zsh/user $XDG_CONFIG_HOME/zsh/user
+ln -nfs $DOTFILE_HOME/.config/vim/user $XDG_CONFIG_HOME/vim/user
+ln -nfs $DOTFILE_HOME/.zshrc $HOME/.zshrc
+ln -nfs $DOTFILE_HOME/.vimrc $HOME/.vimrc
+ln -nfs $DOTFILE_HOME/.tmux.conf $HOME/.tmux.conf
+ln -nfs $DOTFILE_HOME/.gitignore_global $HOME/.gitignore_global
 if [[ ! "${1:-}" == "--ignore-gitconfig" ]]; then
-  ln -fs $DOTFILE_HOME/.gitconfig $HOME/.gitconfig
+  ln -nfs $DOTFILE_HOME/.gitconfig $HOME/.gitconfig
 fi
 
 if [[ ! -e $XDG_DATA_HOME/zsh/powerlevel9k ]]; then
