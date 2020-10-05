@@ -20,7 +20,7 @@ ln -nfs $DOTFILE_HOME/.vimrc $HOME/.vimrc
 ln -nfs $DOTFILE_HOME/.tmux.conf $HOME/.tmux.conf
 ln -nfs $DOTFILE_HOME/.gitignore_global $HOME/.gitignore_global
 if [[ ! "${1:-}" == "--ignore-gitconfig" ]]; then
-  ln -nfs $DOTFILE_HOME/.gitconfig $HOME/.gitconfig
+  cp $DOTFILE_HOME/.gitconfig $HOME/.gitconfig
 fi
 
 if [[ ! -e $XDG_DATA_HOME/zsh/powerlevel9k ]]; then
