@@ -26,12 +26,12 @@ fi
 if [[ ! -e $XDG_DATA_HOME/zsh/powerlevel9k ]]; then
   git clone https://github.com/bhilburn/powerlevel9k.git $XDG_DATA_HOME/zsh/powerlevel9k
 fi
-
-# tpm install
+if [[ ! -e $XDG_DATA_HOME/zsh/zsh-syntax-highlighting ]]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $XDG_DATA_HOME/zsh/zsh-syntax-highlighting
+fi
 if [[ ! -e $XDG_DATA_HOME/tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm $XDG_DATA_HOME/tmux/plugins/tpm
 fi
-# anyenv install
 if [[ ! -e $XDG_DATA_HOME/anyenv ]]; then
   git clone https://github.com/anyenv/anyenv.git $XDG_DATA_HOME/anyenv
 fi
