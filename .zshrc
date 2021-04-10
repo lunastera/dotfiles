@@ -99,7 +99,7 @@ bindkey '^[\]' forward-word
 bindkey '^[^[\]C' forward-word
 bindkey '^[\[' backward-word
 bindkey '^[^[\[D' backward-word
-bindkey '^r' select-history
+bindkey '^r' fzf-select-history
 bindkey "^f" fda
 bindkey '^\\' fzf-src
 bindkey '^g' glog

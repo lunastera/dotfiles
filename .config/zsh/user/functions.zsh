@@ -24,11 +24,11 @@ function set-hostname() {
 npmbin(){[ $# -ne 0 ] && $(npm bin)/$*}
 
 # ============== fzf ==============
-function select-history() {
+function fzf-select-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
 }
-zle -N select-history
+zle -N fzf-select-history
 
 function fd() {
   DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` \
