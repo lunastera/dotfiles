@@ -13,6 +13,7 @@ zle -N fzf-select-history
 function fzf-find-cd() {
   local dir
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+  zle accept-line
 }
 zle -N fzf-find-cd
 
