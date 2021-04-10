@@ -36,4 +36,4 @@ if [[ ! -e $XDG_DATA_HOME/anyenv ]]; then
   git clone https://github.com/anyenv/anyenv.git $XDG_DATA_HOME/anyenv
 fi
 
-source $HOME/.zshrc
+echo "source $HOME/.zshrc"
