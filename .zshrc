@@ -37,7 +37,6 @@ SBT_OPT_LIST=(
 )
 
 # export SBT_OPTS="$(IFS=" "; echo "${SBT_OPT_LIST[*]}")"
-export FZF_DEFAULT_OPTS="--reverse --ansi --select-1 --border"
 export MAVEN_OPTS="-Dmaven.repo.local=$XDG_CACHE_HOME/m2/repository"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
@@ -100,9 +99,9 @@ bindkey '^[^[\]C' forward-word
 bindkey '^[\[' backward-word
 bindkey '^[^[\[D' backward-word
 bindkey '^r' fzf-select-history
-bindkey "^f" fda
+bindkey "^f" fzf-find-cd
 bindkey '^\\' fzf-src
-bindkey '^g' glog
+bindkey '^g' fzf-glog
 
 autoload -Uz compinit && compinit
 autoload -Uz colors && colors
@@ -129,6 +128,7 @@ alias -s sh=sh
 # load scripts
 ( type anyenv > /dev/null 2>&1 ) && eval "$(anyenv init -)"
 [[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && source $SDKMAN_DIR/bin/sdkman-init.sh
+( type fzf > /dev/null 2>&1 ) && source $XDG_CONFIG_HOME/zsh/user/fzf.zsh
 source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
 source $ZROOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

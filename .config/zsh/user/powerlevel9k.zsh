@@ -1,4 +1,5 @@
-# ============== powerlevel9k ==============
+# Styling
+# ==============
 
 # prompt elements
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh root_indicator context dir_writable dir vcs virtualenv)
