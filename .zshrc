@@ -121,6 +121,7 @@ alias la='ls -a'
 alias ll='ls -l'
 alias tma='tmux a -t'
 alias dps='docker ps --format "table {{.Names}}\t{{.RunningFor}}\t{{.Status}}\t{{.Ports}}"'
+alias dns-cache-clear='sudo killall -HUP mDNSResponder'
 
 # suffix
 alias -s sh=sh
