@@ -140,5 +140,6 @@ alias -s sh=sh
 ( type fzf > /dev/null 2>&1 ) && source $XDG_CONFIG_HOME/zsh/user/fzf.zsh
 source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
 source $ZROOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -s $XDG_CONFIG_HOME/zsh/user/.zshrc.local ]] && source $XDG_CONFIG_HOME/zsh/user/.zshrc.local
 
 ( type zprof > /dev/null 2>&1 ) && zprof | less
