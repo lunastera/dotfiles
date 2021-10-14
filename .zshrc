@@ -95,14 +95,20 @@ setopt pushd_ignore_dups  # pushd時、重複したディレクトリを追加�
 
 source $XDG_CONFIG_HOME/zsh/user/functions.zsh
 
-bindkey '^[\]' forward-word
-bindkey '^[^[\]C' forward-word
-bindkey '^[\[' backward-word
+bindkey '^[a' beginning-of-line
+bindkey '^[^' beginning-of-line
+bindkey '^[e' end-of-line
+bindkey '^[$' end-of-line
+bindkey '^[f' forward-word
+bindkey '^[w' forward-word
+bindkey '^[^[\[C' forward-word
+bindkey '^[b' backward-word
 bindkey '^[^[\[D' backward-word
 bindkey '^r' fzf-select-history
 bindkey "^f" fzf-find-cd
 bindkey '^\\' fzf-src
 bindkey '^g' fzf-glog
+bindkey '^b' fzf-switching-branch
 
 autoload -Uz compinit && compinit
 autoload -Uz colors && colors
