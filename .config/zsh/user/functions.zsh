@@ -20,7 +20,3 @@ function chpwd() {
 function set-hostname() {
   scutil --set HostName $(scutil --get LocalHostName)
 }
-
-# using commands in the local node_modules
-# npmbin [command]
-npmbin(){[ $# -ne 0 ] && $(npm bin)/$*}
