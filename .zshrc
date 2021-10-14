@@ -67,8 +67,9 @@ export ANYENV_DEFINITION_ROOT=$XDG_CONFIG_HOME/anyenv/anyenv-install
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
 export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
-export AWS_CONFIG_FILE=$XDG_CONFIG_HOME/aws/config
-export AWS_SHARED_CREDENTIALS_FILE=$XDG_CONFIG_HOME/aws/credentials
+export AWS_HOME=$XDG_CONFIG_HOME/aws
+export AWS_CONFIG_FILE=$AWS_HOME/config
+export AWS_SHARED_CREDENTIALS_FILE=$AWS_HOME/credentials
 
 export FPATH=$ZROOTDIR/completion:$ZROOTDIR/zfunc:$FPATH
 export MANPATH=/usr/local/share/man:$MANPATH
