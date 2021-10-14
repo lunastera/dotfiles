@@ -18,7 +18,7 @@ setopt inc_append_history   # イクリメンタルに履歴追加
 setopt hist_reduce_blanks   # 余分な空白は詰めて保存
 
 # environment
-typeset -U PATH MANPATH FPATH
+typeset -U PATH MANPATH FPATH LIBRARY_PATH
 
 export LANG=ja_JP.UTF-8
 export GIT_EDITOR=vim
@@ -40,7 +40,7 @@ SBT_OPT_LIST=(
 export MAVEN_OPTS="-Dmaven.repo.local=$XDG_CACHE_HOME/m2/repository"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+export LIBRARY_PATH=/usr/local/lib:/usr/lib:$(brew --prefix openssl)/lib:$(brew --prefix mysql@5.7)/lib
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export STACK_ROOT=$XDG_DATA_HOME/stack
