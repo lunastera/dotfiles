@@ -26,6 +26,15 @@ function fzf-src () {
 }
 zle -N fzf-src
 
+function fzf-switching-branch() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //") &&
+  zle accept-line
+}
+zle -N fzf-switching-branch
+
 # git commit browser (enter for show, ctrl-d for diff)
 function fzf-glog() {
   local out shas sha q k
