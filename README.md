@@ -3,7 +3,5 @@
 ## Install
 
 ```:sh
-$ brew install chezmoi
-$ chezmoi init git@github.com:lunastera/dotfiles.git
-$ chezmoi apply
+$ sh -c "$(curl -fsLS chezmoi.io/get)" -- init --apply lunastera
 ```
