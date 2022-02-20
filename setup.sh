@@ -18,6 +18,7 @@ ln -nfs $DOTFILE_HOME/.config/vim/user $XDG_CONFIG_HOME/vim/user
 ln -nfs $DOTFILE_HOME/.zshrc $HOME/.zshrc
 ln -nfs $DOTFILE_HOME/.vimrc $HOME/.vimrc
 ln -nfs $DOTFILE_HOME/.tmux.conf $HOME/.tmux.conf
+ln -nfs $DOTFILE_HOME/.asdfrc $HOME/.asdfrc
 ln -nfs $DOTFILE_HOME/.gitignore_global $HOME/.gitignore_global
 if [[ ! "${1:-}" == "--ignore-gitconfig" ]]; then
   cp $DOTFILE_HOME/.gitconfig $HOME/.gitconfig
@@ -31,9 +32,6 @@ if [[ ! -e $XDG_DATA_HOME/zsh/zsh-syntax-highlighting ]]; then
 fi
 if [[ ! -e $XDG_DATA_HOME/tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm $XDG_DATA_HOME/tmux/plugins/tpm
-fi
-if [[ ! -e $XDG_DATA_HOME/anyenv ]]; then
-  git clone https://github.com/anyenv/anyenv.git $XDG_DATA_HOME/anyenv
 fi
 
 echo "source $HOME/.zshrc"

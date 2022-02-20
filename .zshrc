@@ -47,7 +47,6 @@ export STACK_ROOT=$XDG_DATA_HOME/stack
 export GOPATH=$XDG_DATA_HOME/go
 export SDKMAN_DIR=$XDG_DATA_HOME/sdkman
 export JAVA_HOME=$SDKMAN_DIR/candidates/java/current
-export ANYENV_ROOT=$XDG_DATA_HOME/anyenv
 export POETRY_HOME=$XDG_DATA_HOME/poetry
 export TIG_HOME=$XDG_DATA_HOME/tig
 
@@ -63,7 +62,6 @@ export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
 export IPYHTONDIR=$XDG_CACHE_HOME/ipython
 export DOCKER_TMPDIR=$XDG_CACHE_HOME/docker
 
-export ANYENV_DEFINITION_ROOT=$XDG_CONFIG_HOME/anyenv/anyenv-install
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
 export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
@@ -84,8 +82,11 @@ export PATH=$(brew --prefix openssl)/bin:$PATH
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export PATH=$STACK_ROOT:$PATH
 export PATH=$CARGO_HOME/bin:$RUSTUP_HOME/bin:$PATH
-export PATH=$ANYENV_ROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
+
+# openssl
+export LDFLAGS="-L$(brew --prefix openssl)/lib"
+export CPPFLAGS="-I$(brew --prefix openssl)/include"
 
 # option
 setopt print_eight_bit    # 日本語ファイル名表示可能
@@ -135,8 +136,8 @@ alias dns-cache-clear='sudo killall -HUP mDNSResponder'
 alias -s sh=sh
 
 # load scripts
-( type anyenv > /dev/null 2>&1 ) && eval "$(anyenv init -)"
 [[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && source $SDKMAN_DIR/bin/sdkman-init.sh
+[[ -s $(brew --prefix asdf)/asdf.sh ]] && . $(brew --prefix asdf)/asdf.sh
 ( type fzf > /dev/null 2>&1 ) && source $XDG_CONFIG_HOME/zsh/user/fzf.zsh
 source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
 source $ZROOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
