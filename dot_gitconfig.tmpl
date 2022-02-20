@@ -1,0 +1,9 @@
+[user]
+  name = {{ .github.user | quote }}
+  email = {{ .github.email | quote }}
+[core]
+  excludesfile = ~/.gitignore_global
+  autocrlf = input
+[ghq]
+  root = ~/.local/share/go
+  root = ~/.local/share/ghq
