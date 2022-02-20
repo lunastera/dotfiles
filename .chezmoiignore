@@ -1,1 +1,5 @@
-README.md
+/README.md
+
+{{- if eq (env "REMOTE_CONTAINERS") "true" }}
+/.gitignore
+{{- end }}
