@@ -4,6 +4,6 @@
 
 ```:sh
 $ brew install chezmoi
-$ chezmoi init git@github.com:lunastera/chezmoi-dotfiles.git
+$ chezmoi init git@github.com:lunastera/dotfiles.git
 $ chezmoi apply
 ```
