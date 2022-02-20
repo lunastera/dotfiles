@@ -1,6 +1,9 @@
-# Install
+# dotfiles
+
+## Install
 
 ```:sh
-git clone https://github.com/lunastera/dotfiles.git $HOME/.config/dotfiles
-sh $HOME/.config/dotfiles/setup.sh
+$ brew install chezmoi
+$ chezmoi init git@github.com:lunastera/chezmoi-dotfiles.git
+$ chezmoi apply
 ```

@@ -1,0 +1,8 @@
+{{ $user := promptString "user" "lunastera" -}}
+{{ $email := promptString "email" "12947868+lunastera@users.noreply.github.com" -}}
+[edit]
+  command = "code"
+  args = ["--wait"]
+[data.github]
+  user = {{ $user | quote }}
+  email = {{ $email | quote }}
