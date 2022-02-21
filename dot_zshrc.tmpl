@@ -42,17 +42,30 @@ export MAVEN_OPTS="-Dmaven.repo.local=$XDG_CACHE_HOME/m2/repository"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Variables for different platforms
+{{ if ne (env "REMOTE_CONTAINERS") "true" -}}
 export OPENSSL_DIR=$(brew --prefix openssl)
 export MYSQL_DIR=$(brew --prefix mysql@5.7)
-export ASDF_DIR=$(brew --prefix asdf)
 
-export LIBRARY_PATH=/usr/local/lib:/usr/lib:$OPENSSL_DIR/lib:$MYSQL_DIR/lib
+# openssl
+export PATH=$OPENSSL_DIR/bin:$PATH
+export LDFLAGS="-L$OPENSSL_DIR/lib"
+export CPPFLAGS="-I$OPENSSL_DIR/include"
+
+# mysql
+export PATH=$MYSQL_DIR/bin:$PATH
+
+# asdf
+[[ -s $(brew --prefix asdf)/asdf.sh ]] && . $(brew --prefix asdf)/asdf.sh
+
+# set LIBRARY_PATH
+export LIBRARY_PATH=$OPENSSL_DIR/lib:$MYSQL_DIR/lib
+{{ end -}}
+
+export LIBRARY_PATH=/usr/local/lib:/usr/lib:$LIBRARY_PATH
 export CARGO_HOME=$XDG_DATA_HOME/cargo
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export STACK_ROOT=$XDG_DATA_HOME/stack
 export GOPATH=$XDG_DATA_HOME/go
-export SDKMAN_DIR=$XDG_DATA_HOME/sdkman
-export JAVA_HOME=$SDKMAN_DIR/candidates/java/current
 export POETRY_HOME=$XDG_DATA_HOME/poetry
 export TIG_HOME=$XDG_DATA_HOME/tig
 
@@ -83,16 +96,13 @@ export PATH=$TIG_HOME/bin:$PATH
 export PATH=$XDG_DATA_HOME/bin:$PATH
 export PATH=$XDG_DATA_HOME/yarn/bin:$XDG_CONFIG_HOME/yarn/global/node_modules/.bin:$PATH
 export PATH=$JAVA_HOME/bin:$PATH
-export PATH=$MYSQL_DIR/bin:$PATH
-export PATH=$OPENSSL_DIR/bin:$PATH
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export PATH=$STACK_ROOT:$PATH
 export PATH=$CARGO_HOME/bin:$RUSTUP_HOME/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 
-# openssl
-export LDFLAGS="-L$OPENSSL_DIR/lib"
-export CPPFLAGS="-I$OPENSSL_DIR/include"
+# user functions
+source $ZCONFDIR/functions.zsh
 
 # option
 setopt print_eight_bit    # 日本語ファイル名表示可能
@@ -100,8 +110,6 @@ setopt no_flow_control    # Ctrl+S/Ctrl+Q によるフロー制御を無効
 setopt auto_cd            # ディレクトリ名だけでcd
 setopt auto_pushd         # cdで自動pushd
 setopt pushd_ignore_dups  # pushd時、重複したディレクトリを追加しない
-
-source $XDG_CONFIG_HOME/zsh/user/functions.zsh
 
 bindkey '^[a' beginning-of-line
 bindkey '^[^' beginning-of-line
