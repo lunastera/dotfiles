@@ -7,6 +7,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 
 ZROOTDIR=$XDG_DATA_HOME/zsh
+ZCONFDIR=$XDG_CONFIG_HOME/zsh/user
 
 # history
 HISTFILE=$ZROOTDIR/histfile
@@ -142,11 +143,9 @@ alias cm='chezmoi'
 alias -s sh=sh
 
 # load scripts
-[[ -s $SDKMAN_DIR/bin/sdkman-init.sh ]] && source $SDKMAN_DIR/bin/sdkman-init.sh
-[[ -s $ASDF_DIR/asdf.sh ]] && . $ASDF_DIR/asdf.sh
-( type fzf > /dev/null 2>&1 ) && source $XDG_CONFIG_HOME/zsh/user/fzf.zsh
-source $XDG_CONFIG_HOME/zsh/user/powerlevel9k.zsh
+( type fzf > /dev/null 2>&1 ) && source $ZCONFDIR/fzf.zsh
+source $ZCONFDIR/powerlevel9k.zsh
 source $ZROOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[[ -s $XDG_CONFIG_HOME/zsh/user/.zshrc.local ]] && source $XDG_CONFIG_HOME/zsh/user/.zshrc.local
+[[ -s $ZCONFDIR/.zshrc.local ]] && source $ZCONFDIR/.zshrc.local
 
 ( type zprof > /dev/null 2>&1 ) && zprof | less
